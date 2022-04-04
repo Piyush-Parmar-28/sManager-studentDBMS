@@ -108,7 +108,7 @@ app.get('/deleteStudent', function(req, res){
 })
 
 app.get('/mailSent', function(req, res){
-    return res.sendFile(path.join(__dirname, 'public/mailsent.html'))
+    return res.sendFile(path.join(__dirname, 'public/mailSent.html'))
 })
 
 
