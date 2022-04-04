@@ -6,8 +6,8 @@ const port= process.env.PORT || 8000
 
 
 
-/* Connecting to Database */
-mongoose.connect('mongodb://localhost/sManager')
+/* Connecting to Database (MongoDB Atlas) */
+mongoose.connect('mongodb+srv://piyush28:piyush94145@cluster0.jhrdy.mongodb.net/test')
 var db= mongoose.connection;
 
 db.on('error', console.log.bind(console, "connection error"))
