@@ -39,23 +39,29 @@
                 <!-- In forms, name field is very Important, because it is used in 'req.body.' while connection to database -->
                 <form action="/addNewDetails" method="post">
                     <div class="mb-3">
-                        <label class="form-label" for="email">Name</label>
+                        <label class="form-label" for="email"><b>Name</b></label>
                         <input class="form-control item" type="text" id="name" name="Name" value="<%= NAme %>">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="email">Father's Name</label>
+                        <label class="form-label" for="email"><b>Father's Name</b></label>
                         <input class="form-control item" type="text" id="fname" name="Fname" value="<%= Fname %>">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="password">Contact No.</label>
+                        <label class="form-label" for="password"><b>Contact No.</b></label>
                         
                         <input class="form-control item" type="tel" id="number" name="Number" value="<%= PHOne %>">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="email">Gender: </label>
+                        <label class="form-label" for="email"><b>City</b></label>
+
+                        <input class="form-control item" type="name" id="city" name="City" value="<%= CIty %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email"><b>Gender: </b></label>
 
                         <div class="form-check form-check-inline">
                             
@@ -91,12 +97,6 @@
     
                         </div>
 
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" for="email">City</label>
-
-                        <input class="form-control item" type="name" id="city" name="City" value="<%= CIty %>">
                     </div>
                     
                     <button class="btn btn-primary" type="submit">Update</button>
