@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Add Student - sManager</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+        <div class="container"><a class="navbar-brand logo" href="#">sManager</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/signUp">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contactUs">Contact Us</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page login-page">
+        <section class="clean-block clean-form dark">
+            <div class="container">
+                <div class="block-heading">
+
+                    <% if (ADDed== "Yes") { %>
+                        <div class="alert alert-success" role="alert">
+                            Student Added Successfully!
+                        </div>
+                    <% } %>
+
+                    <h2 class="text-info">Add Student</h2>
+                    <img src="images/addStudent.svg" style="height: 220px;">
+                </div>
+
+                <!-- In forms, name field is very Important, because it is used in 'req.body.' while connection to database -->
+                <form action="/addStudent" method="post">
+                    <div class="mb-3">
+                        <label class="form-label" for="email"><b>Name</b></label>
+                        <input class="form-control item" type="text" id="name" name="Name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email"><b>Father's Name</b></label>
+                        <input class="form-control item" type="text" id="fname" name="Fname" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="password"><b>Contact No.</b></label>
+                        <input class="form-control" type="tel" id="number" name="Number" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email"><b>City</b></label>
+                        <input class="form-control item" type="name" id="city" name="City" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email"><b>Gender: </b></label>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input mx-1" type="radio" name="Gender" id="inlineRadio1" value="Male">
+                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                          </div>
+    
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Gender" id="inlineRadio2" value="Female">
+                            <label class="form-check-label" for="inlineRadio2">Female</label>
+    
+                        </div>
+
+                    </div>
+                    
+                    <button class="btn btn-primary" type="submit">Add Student</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pb-3 pt-4 bg-dark">
+
+        <p class="text-center text-white border-bottom mx-5 pb-3" style="font-size: larger; font-family: 'Times New Roman', Times, serif;">This Website is a copyright property  <i class="far fa-copyright"></i>  of Piyush Parmar.</p>
+  
+        <p class="text-center text-white mb-0" style="font-size: larger; font-family: 'Times New Roman', Times, serif;">All Rights Reserved.</p>
+    </footer>
+    
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="assets/js/vanilla-zoom.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Student Detail - sManager</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+        <div class="container"><a class="navbar-brand logo" href="#">sManager</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/signUp">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contactUs">Contact Us</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page login-page">
+        <section class="clean-block clean-form dark">
+            <div class="container">
+
+                <div class="block-heading">
+
+                    <% if (STAtus== "Updated") { %>
+                        <div class="alert alert-success" role="alert">
+                            Student Updated Successfully!
+                        </div>
+                    <% } %>
+
+                    <h2 class="text-info">Student Detail</h2>
+                    <img src="images/<%=AVAtar%>.svg" style="height: 220px;">
+                </div>
+
+                <!-- In forms, name field is very Important, because it is used in 'req.body.' while connection to database -->
+                <form action="/updateStudentDetails" method="post">
+                    <div class="mb-3">
+                        <label class="form-label" for="email"><b>Name: </b></label>
+                        <label class="form-label" for="email" name= "Name"><%= Sname %></label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email"><b>Father's Name: </b></label>
+                        <label class="form-label" for="email" name= "Fname"><%= Fname %></label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email" ><b>Phone: </b></label>
+                        <label class="form-label" for="email" name= "Phone"><%= PHone %></label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email"><b>City: </b></label>
+                        <label class="form-label" for="email" name= "City"><%= CIty %></label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email"><b>Gender: </b></label>
+                        <label class="form-label" for="email" name= "Gender"><%= GEnder %></label>
+                    </div>
+
+                    <button class="btn btn-warning" type="submit">Update Details</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pb-3 pt-4 bg-dark">
+
+        <p class="text-center text-white border-bottom mx-5 pb-3" style="font-size: larger; font-family: 'Times New Roman', Times, serif;">This Website is a copyright property  <i class="far fa-copyright"></i>  of Piyush Parmar.</p>
+  
+        <p class="text-center text-white mb-0" style="font-size: larger; font-family: 'Times New Roman', Times, serif;">All Rights Reserved.</p>
+    </footer>
+    
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="assets/js/vanilla-zoom.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>

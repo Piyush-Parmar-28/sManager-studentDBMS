@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Students List - sManager</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+        <div class="container"><a class="navbar-brand logo" href="#">sManager</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/signUp">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contactUs">Contact Us</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- position-relative & min-vh-100 was necessary to give, since when no. of students were less, then footer was sticking up. -->
+    <div id="main" class="page position-relative min-vh-100">
+            
+        <div id="wrapper" class="container">
+                <div class="d-flex flex-column" id="content-wrapper">
+
+                    <div id="content">
+                            
+                        <div class="container-fluid ">
+
+                            <% if(SIze == "0") { %>
+                                <div class="alert alert-warning my-5 d-flex justify-content-center" role="alert">
+                                    No Student Information Available!
+                                </div>
+
+                                <div class="text-center mb-4">
+                                    <img src="images/noInfo.svg" class="mx-auto" style="height: 350px;">
+                                </div>
+                                
+                                
+                                
+                            <% } else { %>    
+            
+                                <div class="card shadow mb-4 mt-5">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 fw-bold d-flex justify-content-center">Student's List</p>
+                                        </div>
+                                        <div class="card-body">
+                                            
+                                            <div class="table-responsive table mt-2 " id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                                <table class="table my-0" id="dataTable2">
+                                                    <thead>
+
+                                                        <!-- Declaring table row -->
+                                                        <tr>
+                                                            <!-- Declaring table headers (th) -->
+                                                            <th>Photo</th>
+                                                            <th>Name</th>
+                                                            <th>Father's Name</th>
+                                                            <th>Phone</th>
+                                                            <th>Gender</th>
+                                                            <th>City</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+
+
+
+                                                        <% for(var i=0; i<SIze; i++) {%>
+
+                                                            <tr>
+
+                                                                <% if( REsult[i].gender == "Male"){ %>
+                                                                    <td>
+                                                                        <img class="rounded-circle me-2" width="30" height="30" src="images/maleAvatar.svg">
+                                                                    </td>
+
+                                                                <% } else {%>
+
+                                                                    <td>
+                                                                        <img class="rounded-circle me-2" width="30" height="30" src="images/femaleAvatar.svg">
+                                                                    </td>
+
+                                                                <% } %>    
+
+                                                                
+                                                                
+                                                                <td>
+                                                                    <%= REsult[i].name %>
+                                                                </td>
+                                                                
+                                                                <td>
+                                                                    <%= REsult[i].fname %>
+                                                                </td>
+                                                            
+                                                                <td>
+                                                                    <%= REsult[i].phone %>
+                                                                </td>
+
+                                                                <td>
+                                                                    <%= REsult[i].gender %>
+                                                                </td>
+
+                                                                <td>
+                                                                    <%= REsult[i].city %>
+                                                                </td>
+
+                                                            </tr>
+                                                        <% } %>
+
+                                                        <!-- <tr>
+                                                            <td>
+                                                                <img class="rounded-circle me-2" width="30" height="30" src="images/maleAvatar.svg">
+                                                            </td>
+                                                            <td>Airi Satou</td>
+                                                            <td>Accountant</td>
+                                                            <td>Tokyo</td>
+                                                            <td>33</td>
+                                                            <td>2008/11/28</td>
+                                                            
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg"></td>
+                                                            <td>Chief Executive</td>
+                                                            <td>London</td>
+                                                            <td>47</td>
+                                                            <td>2009/10/09<br></td>
+                                                            <td>$1,200,000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar3.jpeg"></td>
+                                                            <td>Junior Technical</td>
+                                                            <td>San Francisco</td>
+                                                            <td>66</td>
+                                                            <td>2009/01/12<br></td>
+                                                            <td>$86,000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar4.jpeg"></td>
+                                                            <td>Software Engineer</td>
+                                                            <td>London</td>
+                                                            <td>41</td>
+                                                            <td>2012/10/13<br></td>
+                                                            <td>$132,000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar5.jpeg"></td>
+                                                            <td>Software Engineer</td>
+                                                            <td>San Francisco</td>
+                                                            <td>28</td>
+                                                            <td>2011/06/07<br></td>
+                                                            <td>$206,850</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg"></td>
+                                                            <td>Integration Specialist</td>
+                                                            <td>New York</td>
+                                                            <td>61</td>
+                                                            <td>2012/12/02<br></td>
+                                                            <td>$372,000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg"><br></td>
+                                                            <td>Software Engineer</td>
+                                                            <td>London</td>
+                                                            <td>38</td>
+                                                            <td>2011/05/03<br></td>
+                                                            <td>$163,500</td>
+                                                        </tr> 
+                                                        <tr>
+                                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar3.jpeg"></td>
+                                                            <td>Pre-Sales Support</td>
+                                                            <td>New York</td>
+                                                            <td>21</td>
+                                                            <td>2011/12/12<br></td>
+                                                            <td>$106,450</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar4.jpeg"></td>
+                                                            <td>Sales Assistant</td>
+                                                            <td>New York</td>
+                                                            <td>46</td>
+                                                            <td>2011/12/06<br></td>
+                                                            <td>$145,600</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar5.jpeg"></td>
+                                                            <td>Senior JavaScript</td>
+                                                            <td>Edinburgh</td>
+                                                            <td>22</td>
+                                                            <td>2012/03/29<br></td>
+                                                            <td>$433,060</td>
+                                                        </tr> -->
+
+
+                                                    </tbody>
+
+                                                    <tfoot>
+                                                        <tr></tr>
+                                                    </tfoot>
+                                                    
+                                                </table>
+                                            </div>
+                                        </div>
+                
+                                </div>
+
+                            <% } %>
+
+                        </div>
+                        
+                    </div>
+        
+                </div>
+        </div>
+        
+    </div>
+        
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="pb-3 pt-4 bg-dark">
+
+        <p class="text-center text-white border-bottom mx-5 pb-3" style="font-size: larger; font-family: 'Times New Roman', Times, serif;">This Website is a copyright property  <i class="far fa-copyright"></i>  of Piyush Parmar.</p>
+  
+        <p class="text-center text-white mb-0" style="font-size: larger; font-family: 'Times New Roman', Times, serif;">All Rights Reserved.</p>
+    </footer>
+    
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="assets/js/vanilla-zoom.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
