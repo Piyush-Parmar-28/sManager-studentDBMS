@@ -163,6 +163,7 @@ app.post('/login', function(req, res){
         }
 
         else{
+            console.log("Printing the result: ");
             console.log(result)
         }
 
