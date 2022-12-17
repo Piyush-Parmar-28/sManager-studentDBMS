@@ -407,7 +407,7 @@ app.post('/addNewDetails', function(req, res){
 
 /* get method */
 app.get('/', function(req, res){
-    res.render('index.ejs', {
+    return res.render('index.ejs', {
         ACCess: allowAccess
     })
 })
