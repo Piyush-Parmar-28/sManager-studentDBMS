@@ -413,3 +413,7 @@ app.get('/', function(req, res){
 app.listen(port, ()=>{
     console.log(`Server Listening on Port: ${port}`)
 })
+
+process.on("unhandledRejection", err =>{
+    console.log("unhandled error is -----> "+ err);
+})
