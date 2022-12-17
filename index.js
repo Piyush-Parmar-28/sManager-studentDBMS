@@ -149,7 +149,7 @@ app.post('/signUp', function(req, res){
     });
 })
 
-app.post('/login', function(req, res){
+app.post('/login', async function(req, res){
     var email_check= req.body.Email;
     var pass_check= req.body.Password;
 
