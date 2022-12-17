@@ -157,22 +157,22 @@ app.post('/login', function(req, res){
     console.log("password is: "+ pass_check)
 
     db.collection('Users').find( {"email":email_check, "password": pass_check} ).toArray(function(err, result){
-        if(err){
-            console.log("The login error is: ");
-            throw err;
-        }
+        // if(err){
+        //     console.log("The login error is: ");
+        //     throw err;
+        // }
 
-        else{
-            console.log("Printing the result: ");
-            console.log(result)
-        }
+        // else{
+        //     console.log("Printing the result: ");
+        //     console.log(result)
+        // }
 
-        if(result.length == 0){
+        // if(result.length == 0){
             
-            res.render('login.ejs', {
-                LOgin: "Invalid",
-            })
-        }
+        //     res.render('login.ejs', {
+        //         LOgin: "Invalid",
+        //     })
+        // }
 
         else{
             allowAccess= "Yes";
