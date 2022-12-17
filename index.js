@@ -20,9 +20,9 @@ db.once('open', function(callback){
 
 
 var app= express()
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'))
 
-
+app.set("views", path.join(__dirname, "views"))
 
 
 
@@ -407,7 +407,7 @@ app.post('/addNewDetails', function(req, res){
 
 /* get method */
 app.get('/', function(req, res){
-    return res.render('index.ejs', {
+    res.render('index.ejs', {
         ACCess: allowAccess
     })
 })
