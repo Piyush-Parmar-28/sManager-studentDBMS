@@ -153,11 +153,12 @@ app.post('/login', function(req, res){
     var email_check= req.body.Email;
     var pass_check= req.body.Password;
 
-    console.log(email_check)
-    console.log(pass_check)
+    console.log("email is:"+ email_check)
+    console.log("password is: "+ pass_check)
 
     db.collection('Users').find( {"email":email_check, "password": pass_check} ).toArray(function(err, result){
         if(err){
+            console.log("The login error is: ");
             throw err;
         }
 
@@ -167,7 +168,7 @@ app.post('/login', function(req, res){
 
         if(result.length == 0){
             
-            return res.render('login.ejs', {
+            res.render('login.ejs', {
                 LOgin: "Invalid",
                 
             })
@@ -175,7 +176,7 @@ app.post('/login', function(req, res){
 
         else{
             allowAccess= "Yes";
-            return res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
+            res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
         }
     })
 })
