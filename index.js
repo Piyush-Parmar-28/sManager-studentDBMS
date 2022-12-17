@@ -174,10 +174,10 @@ app.post('/login', function(req, res){
         //     })
         // }
 
-        else{
+        // else{
             allowAccess= "Yes";
             res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
-        }
+        // }
     })
 })
 
