@@ -215,18 +215,13 @@ app.post('/addStudent', function(req, res){
     })
 })
 
-
-/* db.collection("Students").createIndex( { name: "text" }) */
-
-
-
 OLDNAME= "";
 OLDFNAME= "";
 
 app.post('/findStudent', function(req, res){
     var name= req.body.Name;
 
-    /* console.log(name); */
+    console.log(name); 
 
     /* After creation of index in MongoDB, this method of search will be is for case-insensitive search. */
     db.collection('Students').find( {$text: {$search: name} }  ).toArray(function(err, result){
@@ -259,7 +254,7 @@ app.post('/findStudent', function(req, res){
             }
 
             // While using ejs file, we have to use 'res.render' instead of using 'res.sendFile'
-            return res.render('studentDetailCard.ejs', {
+            res.render('studentDetailCard.ejs', {
                 STAtus: "Not Updated",
                 Sname: NAME,
                 Fname: FNAME,
