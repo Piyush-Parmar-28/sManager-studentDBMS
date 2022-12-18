@@ -156,31 +156,31 @@ app.post('/login', async function(req, res){
     console.log("email is:"+ email_check)
     console.log("password is: "+ pass_check)
 
-    await db.collection('Users').find( {"email":email_check, "password": pass_check} ).then(response =>{
-        // if(err){
-        //     console.log("The login error is: ");
-        //     throw err;
-        // }
+    // await db.collection('Users').find( {"email":email_check, "password": pass_check} ).then(response =>{
+    //     // if(err){
+    //     //     console.log("The login error is: ");
+    //     //     throw err;
+    //     // }
 
-        // else{
-            console.log("Printing the response: ");
-            console.log(response)
-        // }
+    //     // else{
+    //         console.log("Printing the response: ");
+    //         console.log(response)
+    //     // }
 
-        if(response.length == 0){
+    //     if(response.length == 0){
             
-            res.render('login.ejs', {
-                LOgin: "Invalid",
-            })
-        }
+    //         res.render('login.ejs', {
+    //             LOgin: "Invalid",
+    //         })
+    //     }
 
-        else{
+    //     else{
             allowAccess= "Yes";
             res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
-        }
-    }).catch(error =>{
-        console.log("Error occured while login: "+ error);
-    })
+    //     }
+    // }).catch(error =>{
+    //     console.log("Error occured while login: "+ error);
+    // })
 
     // if(foundUser1.length == 0){
             
