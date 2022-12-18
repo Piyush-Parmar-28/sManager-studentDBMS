@@ -158,48 +158,7 @@ app.post('/login', async function(req, res){
     console.log("email is:"+ email_check)
     console.log("password is: "+ pass_check)
 
-    // let foundUser= await db.collection('Users').find( {"email":email_check, "password": pass_check} )
-    
-    // .then(response =>{
-    //     // if(err){
-    //     //     console.log("The login error is: ");
-    //     //     throw err;
-    //     // }
-
-    //     // else{
-    //         console.log("Printing the response: ");
-    //         console.log(response)
-    //     // }
-
-    //     if(response.length == 0){
-            
-    //         res.render('login.ejs', {
-    //             LOgin: "Invalid",
-    //         })
-    //     }
-
-    //     else{
-            // allowAccess= "Yes";
-            // res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
-    //     }
-    // }).catch(error =>{
-    //     console.log("Error occured while login: "+ error);
-    // })
-
-    // if(foundUser1.length == 0){
-            
-    //     res.render('login.ejs', {
-    //         LOgin: "Invalid",
-    //     })
-    // }
-
-    // else{
-    //     allowAccess= "Yes";
-    //     res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
-    // }
-
-    // let foundUser= await 
-    await db.collection('Users').findOne({"email":email_check, "password": pass_check} ,function(err, result){
+    db.collection('Users').findOne({"email":email_check, "password": pass_check} ,function(err, result){
         if(err){
             console.log("The login error is: ");
             throw err;
@@ -210,7 +169,7 @@ app.post('/login', async function(req, res){
             console.log(result)
         }
 
-        if(result.length == 0){
+        if(result == null){
             
             res.render('login.ejs', {
                 LOgin: "Invalid",
@@ -402,17 +361,6 @@ app.post('/addNewDetails', function(req, res){
     var phone= req.body.Number;
     var gender= req.body.Gender;
     var city= req.body.City;
-
-    /* console.log( name.toUpperCase() );
-
-    console.log("\n\n"+ OLDNAME)
-    console.log(OLDFNAME)
-
-    console.log("\n\n"+ name)
-    console.log(fname)
-    console.log(phone)
-    console.log(gender)
-    console.log(city) */
 
     db.collection('Students').updateOne( {"name": oldName,"fname": oldFname}, {
         $set: {
