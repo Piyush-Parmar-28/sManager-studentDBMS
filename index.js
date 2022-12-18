@@ -1,27 +1,27 @@
 const express = require('express')
-const mongoose = require('mongoose')
-const bodyParser = require("body-parser")
-const path = require('path')
-const port = process.env.PORT || 8000
+const mongoose= require('mongoose')
+const bodyParser= require("body-parser")
+const path= require('path')
+const port= process.env.PORT || 8000
 
 
 
 /* Connecting to Database (MongoDB Atlas) */
-mongoose.connect('mongodb+srv://piyush28:piyush94145@cluster0.jhrdy.mongodb.net/sManager').then(() => {
-    var db = mongoose.connection;
+mongoose.connect('mongodb+srv://piyush28:piyush94145@cluster0.jhrdy.mongodb.net/sManager').then(()=>{
+    setTimeout( ()=>{console.log("Connecting");} , 5000);
+})
+var db= mongoose.connection;
 
-    db.on('error', console.log.bind(console, "connection error"))
+db.on('error', console.log.bind(console, "connection error"))
 
-    db.once('open', function (callback) {
-        console.log("Connection Succeeded")
-    })
-
+db.once('open', function(callback){
+    console.log("Connection Succeeded")
 })
 
 
 
 
-var app = express()
+var app= express()
 app.use(express.static(__dirname + '/public'))
 
 app.set("views", path.join(__dirname, "views"))
@@ -34,7 +34,7 @@ app.set("views", path.join(__dirname, "views"))
 // ejs is a templating engine.
 // Using ejs, we can add dynamic data to our HTML File.
 // Inorder to use ejs, our file should be stored in the 'views' folder only.
-const ejs = require('ejs')
+const ejs= require('ejs')
 
 // Setting the view engine to ejs
 app.set('view engine', 'ejs')
@@ -46,7 +46,7 @@ app.set('view engine', 'ejs')
 
 
 /* Setting 'allowAccess' as global variable */
-allowAccess = "No";
+allowAccess= "No";
 
 
 
@@ -54,62 +54,62 @@ allowAccess = "No";
 
 
 /* get Methods */
-app.get('/login', function (req, res) {
+app.get('/login', function(req, res){
     res.render('login.ejs', {
         LOgin: "No"
     })
 })
 
-app.get('/signUp', function (req, res) {
+app.get('/signUp', function(req, res){
     res.sendFile(path.join(__dirname, ('public/signUp.html')))
 })
 
-app.get('/contactUs', function (req, res) {
+app.get('/contactUs', function(req, res){
     res.sendFile(path.join(__dirname, ('public/contactUs.html')))
 })
 
-app.get('/addStudent', function (req, res) {
-
+app.get('/addStudent', function(req, res){
+    
     res.render("addStudent.ejs", {
         ADDed: "No"
     })
 })
 
-app.get('/findStudent', function (req, res) {
+app.get('/findStudent', function(req, res){
     res.render('findStudent.ejs', {
         /* Initially, when no form has been submitted, then let us set variable FOund to be "Yes" in our ejs file */
         FOund: "Yes"
     });
 })
 
-app.get('/studentList', function (req, res) {
+app.get('/studentList', function(req, res){
 
-    db.collection('Students').find().toArray(function (err, result) {
-        if (err) {
+    db.collection('Students').find().toArray(function(err, result){
+        if (err){
             throw err;
         }
-        else {
+        else{
             /* console.log(result)
             console.log(result.length) */
-
+            
             return res.render('studentList.ejs', {
                 SIze: result.length,
-                REsult: result,
+                REsult:result,
             })
-
+           
         }
-
+        
     })
 
 })
 
-app.get('/deleteStudent', function (req, res) {
+app.get('/deleteStudent', function(req, res){
     res.render('deleteStudent.ejs', {
         DEleted: "No"
     })
 })
 
-app.get('/mailSent', function (req, res) {
+app.get('/mailSent', function(req, res){
     return res.sendFile(path.join(__dirname, 'public/mailSent.html'))
 })
 
@@ -123,43 +123,43 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-app.post('/signUp', function (req, res) {
-    var name = req.body.Name;
-    var email = req.body.Email;
-    var pass = req.body.Password;
-    var phone = req.body.Phone;
+app.post('/signUp', function(req, res){
+    var name= req.body.Name;
+    var email= req.body.Email;
+    var pass= req.body.Password;
+    var phone= req.body.Phone;
 
     console.log(name)
 
-    var data = {
+    var data= {
         "name": name,
         "email": email,
         "password": pass,
         "phone": phone
     }
 
-    db.collection('Users').insertOne(data, function (err, collection) {
-        if (err) {
+    db.collection('Users').insertOne(data, function(err, collection){
+        if(err){
             throw err;
         }
-        else {
+        else{
             console.log("Record Inserted Successfully")
-            allowAccess = "Yes";
+            allowAccess= "Yes";
         }
 
         return res.sendFile(path.join(__dirname, 'public/signUpSuccess.html'))
     });
 })
 
-app.post('/login', async function (req, res) {
-    var email_check = req.body.Email;
-    var pass_check = req.body.Password;
+app.post('/login', async function(req, res){
+    var email_check= req.body.Email;
+    var pass_check= req.body.Password;
 
-    console.log("email is:" + email_check)
-    console.log("password is: " + pass_check)
+    console.log("email is:"+ email_check)
+    console.log("password is: "+ pass_check)
 
     // let foundUser= await db.collection('Users').find( {"email":email_check, "password": pass_check} )
-
+    
     // .then(response =>{
     //     // if(err){
     //     //     console.log("The login error is: ");
@@ -172,22 +172,22 @@ app.post('/login', async function (req, res) {
     //     // }
 
     //     if(response.length == 0){
-
+            
     //         res.render('login.ejs', {
     //             LOgin: "Invalid",
     //         })
     //     }
 
     //     else{
-    // allowAccess= "Yes";
-    // res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
+            // allowAccess= "Yes";
+            // res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
     //     }
     // }).catch(error =>{
     //     console.log("Error occured while login: "+ error);
     // })
 
     // if(foundUser1.length == 0){
-
+            
     //     res.render('login.ejs', {
     //         LOgin: "Invalid",
     //     })
@@ -211,7 +211,7 @@ app.post('/login', async function (req, res) {
         }
 
         if(result.length == 0){
-
+            
             res.render('login.ejs', {
                 LOgin: "Invalid",
             })
@@ -224,16 +224,16 @@ app.post('/login', async function (req, res) {
     })
 })
 
-app.post('/addStudent', function (req, res) {
-    var name = req.body.Name;
-    var fname = req.body.Fname;
-    var phone = req.body.Number;
-    var gender = req.body.Gender;
-    var city = req.body.City;
+app.post('/addStudent', function(req, res){
+    var name= req.body.Name;
+    var fname= req.body.Fname;
+    var phone= req.body.Number;
+    var gender= req.body.Gender;
+    var city= req.body.City;
 
     console.log(name)
 
-    var data = {
+    var data= {
         "name": name,
         "fname": fname,
         "phone": phone,
@@ -241,37 +241,37 @@ app.post('/addStudent', function (req, res) {
         "city": city
     }
 
-    db.collection('Students').insertOne(data, function (err, collection) {
-        if (err) {
+    db.collection('Students').insertOne(data, function(err, collection){
+        if(err){
             throw err;
         }
-        else {
+        else{
             console.log("Student Added Successfully!")
-
+            
             return res.render("addStudent.ejs", {
                 ADDed: "Yes"
             })
         }
 
-
+        
     })
 })
 
-OLDNAME = "";
-OLDFNAME = "";
+OLDNAME= "";
+OLDFNAME= "";
 
-app.post('/findStudent', function (req, res) {
-    var name = req.body.Name;
+app.post('/findStudent', function(req, res){
+    var name= req.body.Name;
 
-    console.log(name);
+    console.log(name); 
 
     /* After creation of index in MongoDB, this method of search will be is for case-insensitive search. */
-    db.collection('Students').find({ $text: { $search: name } }).toArray(function (err, result) {
-        if (err) {
+    db.collection('Students').find( {$text: {$search: name} }  ).toArray(function(err, result){
+        if(err){
             throw err;
         }
 
-        if (result.length == 0) {
+        if(result.length == 0){
             console.log("No Such Student Exists!")
 
             return res.render('findStudent.ejs', {
@@ -279,20 +279,20 @@ app.post('/findStudent', function (req, res) {
             })
         }
 
-        else {
-            let NAME = result[0].name;
-            let FNAME = result[0].fname;
-            let PHONE = result[0].phone;
-            let GENDER = result[0].gender;
-            let CITY = result[0].city;
+        else{
+            let NAME= result[0].name;
+            let FNAME= result[0].fname;
+            let PHONE= result[0].phone;
+            let GENDER= result[0].gender;
+            let CITY= result[0].city;
+            
+            OLDNAME= NAME;
+            OLDFNAME= FNAME;
 
-            OLDNAME = NAME;
-            OLDFNAME = FNAME;
-
-            let AVATAR = "maleAvatar";
+            let AVATAR= "maleAvatar";
 
             if (GENDER == "Female") {
-                AVATAR = "femaleAvatar";
+                AVATAR= "femaleAvatar";
             }
 
             // While using ejs file, we have to use 'res.render' instead of using 'res.sendFile'
@@ -310,22 +310,22 @@ app.post('/findStudent', function (req, res) {
     })
 })
 
-app.post('/deleteSTUDENT', function (req, res) {
-    var name = req.body.Name;
-    var fname = req.body.Fname;
-
+app.post('/deleteSTUDENT', function(req, res){
+    var name= req.body.Name;
+    var fname= req.body.Fname;
+    
     console.log(name)
 
-    db.collection('Students').find({ "name": name, "fname": fname }).toArray(function (err, result) {
-        if (err) {
+    db.collection('Students').find( {"name": name, "fname": fname} ).toArray(function(err, result){
+        if(err){
             throw err
         }
 
-        else {
+        else{
             console.log(result)
         }
 
-        if (result.length == 0) {
+        if(result.length == 0){
             console.log("No Such Student Exists!")
 
             return res.render('deleteStudent.ejs', {
@@ -333,8 +333,8 @@ app.post('/deleteSTUDENT', function (req, res) {
             })
         }
 
-        else {
-            db.collection('Students').deleteOne({ "name": name, "fname": fname })
+        else{
+            db.collection('Students').deleteOne( {"name":name, "fname": fname} )
             console.log("Student Deleted Successfully!")
 
             return res.render("deleteStudent.ejs", {
@@ -342,66 +342,66 @@ app.post('/deleteSTUDENT', function (req, res) {
             })
         }
 
-
+        
     })
 })
 
-app.post('/updateStudentDetails', function (req, res) {
+app.post('/updateStudentDetails', function(req, res){
 
-    var name = OLDNAME;
-    var fname = OLDFNAME;
+    var name= OLDNAME;
+    var fname= OLDFNAME;
 
     console.log(name);
     console.log(fname);
 
-    db.collection('Students').find({ 'name': name, "fname": fname }).toArray(function (err, result) {
-        if (err) {
+    db.collection('Students').find( {'name': name, "fname": fname} ).toArray(function(err, result){
+        if (err){
             throw err;
         }
 
-        else {
+        else{
 
             /* console.log(result) */
 
-            let NAME = result[0].name;
-            let FNAME = result[0].fname;
-            let PHONE = result[0].phone;
-            let GENDER = result[0].gender;
-            let CITY = result[0].city;
+            let NAME= result[0].name;
+            let FNAME= result[0].fname;
+            let PHONE= result[0].phone;
+            let GENDER= result[0].gender;
+            let CITY= result[0].city;
 
-            let AVATAR = "maleAvatar";
+            let AVATAR= "maleAvatar";
 
             if (GENDER == "Female") {
-                AVATAR = "femaleAvatar";
+                AVATAR= "femaleAvatar";
             }
 
             /* console.log(GENDER) */
             /* console.log(OLDNAME) */
-
+            
             return res.render('addNewDetails.ejs', {
                 NAme: NAME,
                 Fname: FNAME,
                 PHOne: PHONE,
                 GEnder: GENDER,
                 CIty: CITY,
-
+            
             })
         }
     })
 
-
+    
 })
 
-app.post('/addNewDetails', function (req, res) {
+app.post('/addNewDetails', function(req, res){
 
-    var oldName = OLDNAME;
-    var oldFname = OLDFNAME;
+    var oldName= OLDNAME;
+    var oldFname= OLDFNAME;
 
-    var name = req.body.Name;
-    var fname = req.body.Fname;
-    var phone = req.body.Number;
-    var gender = req.body.Gender;
-    var city = req.body.City;
+    var name= req.body.Name;
+    var fname= req.body.Fname;
+    var phone= req.body.Number;
+    var gender= req.body.Gender;
+    var city= req.body.City;
 
     /* console.log( name.toUpperCase() );
 
@@ -414,7 +414,7 @@ app.post('/addNewDetails', function (req, res) {
     console.log(gender)
     console.log(city) */
 
-    db.collection('Students').updateOne({ "name": oldName, "fname": oldFname }, {
+    db.collection('Students').updateOne( {"name": oldName,"fname": oldFname}, {
         $set: {
             "name": name,
             "fname": fname,
@@ -422,13 +422,13 @@ app.post('/addNewDetails', function (req, res) {
             "gender": gender,
             "city": city
         }
+        
+    } ) 
 
-    })
+    let avatar= "maleAvatar";
 
-    let avatar = "maleAvatar";
-
-    if (gender == "Female") {
-        avatar = "femaleAvatar"
+    if(gender == "Female"){
+        avatar= "femaleAvatar"
     }
 
     return res.render('studentDetailCard.ejs', {
@@ -439,23 +439,23 @@ app.post('/addNewDetails', function (req, res) {
         GEnder: gender,
         PHone: phone,
         CIty: city,
-
+    
     })
 
 })
 
 /* get method */
-app.get('/', function (req, res) {
+app.get('/', function(req, res){
     res.render('index.ejs', {
         ACCess: allowAccess
     })
 })
 
 
-app.listen(port, () => {
+app.listen(port, ()=>{
     console.log(`Server Listening on Port: ${port}`)
 })
 
-process.on("unhandledRejection", err => {
-    console.log("unhandled error is -----> " + err);
+process.on("unhandledRejection", err =>{
+    console.log("unhandled error is -----> "+ err);
 })
