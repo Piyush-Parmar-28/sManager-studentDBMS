@@ -199,7 +199,7 @@ app.post('/login', async function(req, res){
     // }
 
     // let foundUser= await 
-    await db.collection('Users').find({"email":email_check, "password": pass_check} ).toArray(function(err, result){
+    await db.collection('Users').findOne({"email":email_check, "password": pass_check} ,function(err, result){
         if(err){
             console.log("The login error is: ");
             throw err;
