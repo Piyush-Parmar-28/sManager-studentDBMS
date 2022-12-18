@@ -156,19 +156,43 @@ app.post('/login', async function(req, res){
     console.log("email is:"+ email_check)
     console.log("password is: "+ pass_check)
 
-    let foundUser1= await db.collection('Users').find( {"email":email_check, "password": pass_check} ).toArray()
+    await db.collection('Users').find( {"email":email_check, "password": pass_check} ).toArray().then(response =>{
+        if(err){
+            console.log("The login error is: ");
+            throw err;
+        }
 
-    if(foundUser1.length == 0){
+        else{
+            console.log("Printing the result: ");
+            console.log(response)
+        }
+
+        if(response.length == 0){
             
-        res.render('login.ejs', {
-            LOgin: "Invalid",
-        })
-    }
+            res.render('login.ejs', {
+                LOgin: "Invalid",
+            })
+        }
 
-    else{
-        allowAccess= "Yes";
-        res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
-    }
+        else{
+            allowAccess= "Yes";
+            res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
+        }
+    }).catch(error =>{
+        console.log("Error occured while login: "+ error);
+    })
+
+    // if(foundUser1.length == 0){
+            
+    //     res.render('login.ejs', {
+    //         LOgin: "Invalid",
+    //     })
+    // }
+
+    // else{
+    //     allowAccess= "Yes";
+    //     res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
+    // }
 
     // let foundUser= await db.collection('Users').find( {"email":email_check, "password": pass_check} ).toArray(function(err, result){
     //     if(err){
