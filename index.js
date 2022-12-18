@@ -157,15 +157,15 @@ app.post('/login', async function(req, res){
     console.log("password is: "+ pass_check)
 
     await db.collection('Users').find( {"email":email_check, "password": pass_check} ).toArray().then(response =>{
-        if(err){
-            console.log("The login error is: ");
-            throw err;
-        }
+        // if(err){
+        //     console.log("The login error is: ");
+        //     throw err;
+        // }
 
-        else{
-            console.log("Printing the result: ");
+        // else{
+            console.log("Printing the response: ");
             console.log(response)
-        }
+        // }
 
         if(response.length == 0){
             
