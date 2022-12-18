@@ -156,7 +156,7 @@ app.post('/login', async function(req, res){
     console.log("email is:"+ email_check)
     console.log("password is: "+ pass_check)
 
-    await db.collection('Users').find( {"email":email_check, "password": pass_check} ).toArray().then(response =>{
+    await db.collection('Users').find( {"email":email_check, "password": pass_check} ).then(response =>{
         // if(err){
         //     console.log("The login error is: ");
         //     throw err;
