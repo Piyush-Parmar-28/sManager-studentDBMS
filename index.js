@@ -7,7 +7,7 @@ const port= process.env.PORT || 8000
 
 
 /* Connecting to Database (MongoDB Atlas) */
-await mongoose.connect('mongodb+srv://piyush28:piyush94145@cluster0.jhrdy.mongodb.net/sManager')
+mongoose.connect('mongodb+srv://piyush28:piyush94145@cluster0.jhrdy.mongodb.net/sManager')
 var db= mongoose.connection;
 
 db.on('error', console.log.bind(console, "connection error"))
