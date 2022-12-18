@@ -149,36 +149,50 @@ app.post('/signUp', function(req, res){
     });
 })
 
-app.post('/login', function(req, res){
+app.post('/login', async function(req, res){
     var email_check= req.body.Email;
     var pass_check= req.body.Password;
 
     console.log("email is:"+ email_check)
     console.log("password is: "+ pass_check)
 
-    db.collection('Users').find( {"email":email_check, "password": pass_check} ).toArray(function(err, result){
-        // if(err){
-        //     console.log("The login error is: ");
-        //     throw err;
-        // }
+    let foundUser1= await db.collection('Users').find( {"email":email_check, "password": pass_check} ).toArray()
 
-        // else{
-        //     console.log("Printing the result: ");
-        //     console.log(result)
-        // }
-
-        // if(result.length == 0){
+    if(foundUser1.length == 0){
             
-        //     res.render('login.ejs', {
-        //         LOgin: "Invalid",
-        //     })
-        // }
+        res.render('login.ejs', {
+            LOgin: "Invalid",
+        })
+    }
 
-        // else{
-            allowAccess= "Yes";
-            res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
-        // }
-    })
+    else{
+        allowAccess= "Yes";
+        res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
+    }
+
+    // let foundUser= await db.collection('Users').find( {"email":email_check, "password": pass_check} ).toArray(function(err, result){
+    //     if(err){
+    //         console.log("The login error is: ");
+    //         throw err;
+    //     }
+
+    //     else{
+    //         console.log("Printing the result: ");
+    //         console.log(result)
+    //     }
+
+    //     if(result.length == 0){
+            
+    //         res.render('login.ejs', {
+    //             LOgin: "Invalid",
+    //         })
+    //     }
+
+    //     else{
+    //         allowAccess= "Yes";
+    //         res.sendFile(path.join(__dirname, ('public/loginSuccess.html')))
+    //     }
+    // })
 })
 
 app.post('/addStudent', function(req, res){
