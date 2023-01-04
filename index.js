@@ -220,17 +220,30 @@ OLDNAME= "";
 OLDFNAME= "";
 
 app.post('/findStudent', function(req, res){
-    var name= req.body.Name;
+    var name= (req.body.Name).toLowerCase();
 
-    console.log(name); 
+    console.log("Name is:"+ name); 
 
     /* After creation of index in MongoDB, this method of search will be is for case-insensitive search. */
-    db.collection('Students').find( {$text: {$search: name} }  ).toArray(function(err, result){
+    db.collection('Students').find().toArray(function(err, result){
         if(err){
             throw err;
         }
 
-        if(result.length == 0){
+        console.log("result array is: ");
+        console.log(result);
+
+        var data= result.find((obj) =>{
+            console.log("object is: ");
+            console.log(obj);
+            if (obj.name.toLowerCase() === name) {
+                return obj;
+            }
+        })
+        console.log("Filterd data: ");
+        console.log(data);
+
+        if(data === null){
             console.log("No Such Student Exists!")
 
             return res.render('findStudent.ejs', {
@@ -239,11 +252,11 @@ app.post('/findStudent', function(req, res){
         }
 
         else{
-            let NAME= result[0].name;
-            let FNAME= result[0].fname;
-            let PHONE= result[0].phone;
-            let GENDER= result[0].gender;
-            let CITY= result[0].city;
+            let NAME= data.name;
+            let FNAME= data.fname;
+            let PHONE= data.phone;
+            let GENDER= data.gender;
+            let CITY= data.city;
             
             OLDNAME= NAME;
             OLDFNAME= FNAME;
